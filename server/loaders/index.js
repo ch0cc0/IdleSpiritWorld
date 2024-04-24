@@ -8,13 +8,13 @@ module.exports = async (app) => {
     const expressApp = await expressLoader(app);
   
     // Load Passport middleware
-    const passport = await passportLoader(expressApp);
+    const passport = await passportLoader(app);
   
     // Load API route handlers
     await routeLoader(app, passport);
 
     // Error Handler
-    app.use((err, req, res, next) => {
+    app.use((err, req, res) => {
 
         const { message, status } = err;
     
