@@ -17,6 +17,8 @@ module.exports = async (app) => {
     app.use((err, req, res) => {
 
         const { message, status } = err;
+
+        console.log(err);
     
         return res.status(status).send({ message });
     });

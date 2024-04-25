@@ -12,6 +12,7 @@ module.exports = (app) => {
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
+        // secure false for development testing
         cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 }
     }));
     app.use(flash());
