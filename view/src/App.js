@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ThemeProvider, createTheme, responsiveFontSizes } from "@mui/material";
+
+import Auth from "./pages/auth";
+import Audio from "./components/audio";
 
 function App() {
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#00a86b',
+      },
+      secondary: {
+        main: '#FFFFFF',
+      },
+    },
+    typography: {
+      fontFamily: [
+        'VT323',
+      ].join(','),
+    },
+  });
+
+  const responsiveTheme = responsiveFontSizes(theme);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          TESTING
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={responsiveTheme}>
+        <Audio />
+        <Router>
+          <Routes>
+            <Route path="/" element={<Auth />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
     </div>
   );
 }
