@@ -1,6 +1,6 @@
 import { Backdrop, Box, Stack, TextField } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
-import { LargerButton } from '../button';
+import { LargerButton } from '../../../../components/ui/button';
 
 function SignUpForm({open, handleClose, handleSubmit}) {
     const handleFormClick = (event) => {
@@ -39,7 +39,7 @@ function SignUpForm({open, handleClose, handleSubmit}) {
                 >
                     <Stack padding={1} spacing={1}>
                         <TextField 
-                        id="username" 
+                        id="newUsername" 
                         label="Username" 
                         variant="filled"
                         name="username"
@@ -54,7 +54,7 @@ function SignUpForm({open, handleClose, handleSubmit}) {
                         autoComplete="email"
                         required/>
                         <TextField 
-                        id="password" 
+                        id="newPassword" 
                         label="Password" 
                         variant="filled" 
                         type="password"

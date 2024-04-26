@@ -2,9 +2,21 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme, responsiveFontSizes } from "@mui/material";
 
 import Auth from "./pages/auth";
-import Audio from "./components/audio";
+import WelcomePage from "./pages/welcome";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
+import { isAuthenticated } from "./store/auth/authActions";
+
+import NavBar from "./components/navbar";
 
 function App() {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(isAuthenticated());
+  }, [auth.isAuthenticated]);
 
   const theme = createTheme({
     palette: {
@@ -27,10 +39,10 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={responsiveTheme}>
-        <Audio />
+        <NavBar />
         <Router>
           <Routes>
-            <Route path="/" element={<Auth />} />
+            <Route path="/" element={auth.isAuthenticated ? <WelcomePage /> : <Auth />} />            
           </Routes>
         </Router>
       </ThemeProvider>

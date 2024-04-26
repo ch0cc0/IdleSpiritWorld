@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LargerButton } from '../button';
+import { LargerButton } from '../../../../components/ui/button';
 import SignUpForm from './signUpForm';
 
 function SignUpButton() {
