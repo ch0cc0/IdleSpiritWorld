@@ -1,17 +1,16 @@
 import { useState } from 'react';
+import validator from 'validator';
+
 import LoginForm from './loginForm';
 import { LargerButton } from '../../../../components/ui/button';
-import validator from 'validator';
+
 
 import { useDispatch } from "react-redux";
 import {loginUser} from '../../../../store/auth/authActions';
 
-function LoginButton() {
+function LoginButton({signUpFormOpen, setSignUpFormOpen, loginFormOpen, setLoginFormOpen}) {
     
     const dispatch = useDispatch();
-      
-
-    const [open, setOpen] = useState(false);
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -22,17 +21,19 @@ function LoginButton() {
     }
 
     const handlePasswordChange = (e) => {
-        console.log("Password: " + e.target.value);
         setPassword(e.target.value);
     }
 
 
     const handleClose = () => {
-        setOpen(false);
+        setLoginFormOpen(false);
     };
     
     const handleOpen = () => {
-        setOpen(true);
+        if (signUpFormOpen) {
+            setSignUpFormOpen(false);
+        }
+        setLoginFormOpen(true);
     };
 
     const handleSubmit = (e) => {
@@ -54,7 +55,7 @@ function LoginButton() {
     return (
         <>
             <LargerButton variant="outlined" onClick={handleOpen} size="large">Login</LargerButton>
-            <LoginForm open={open} handleClose={handleClose} handleSubmit={handleSubmit}
+            <LoginForm open={loginFormOpen} handleClose={handleClose} handleSubmit={handleSubmit}
              username={username} password={password} handleUsernameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange}/>
         </>
     );

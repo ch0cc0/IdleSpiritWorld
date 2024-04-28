@@ -2,7 +2,7 @@ import { Backdrop, Box, Stack, TextField } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import { LargerButton } from '../../../../components/ui/button';
 
-function SignUpForm({open, handleClose, handleSubmit}) {
+function SignUpForm({open, handleClose, handleSubmit, username, email, password, handleUsernameChange, handleEmailChange, handlePasswordChange}) {
     const handleFormClick = (event) => {
         // Prevent click event propagation to the backdrop
         event.stopPropagation();
@@ -22,11 +22,12 @@ function SignUpForm({open, handleClose, handleSubmit}) {
         >
             <Stack sx={{
                 zIndex: 100
-            }} onClick={handleFormClick}>
+            }} 
+            onClick={handleFormClick}
+            component="form"
+            onSubmit={handleSubmit}
+            autoComplete="off">
                 <Box 
-                component="form"
-                noValidate
-                autoComplete="off"
                 sx={{
                     margin: 2,
                     borderRadius: 1,
@@ -35,11 +36,12 @@ function SignUpForm({open, handleClose, handleSubmit}) {
                     bgcolor: 'primary.dark',
                     },
                 }}
-                onSubmit={handleSubmit}
                 >
                     <Stack padding={1} spacing={1}>
                         <TextField 
-                        id="newUsername" 
+                        id="newUsername"
+                        value={username}
+                        onChange={handleUsernameChange}
                         label="Username" 
                         variant="filled"
                         name="username"
@@ -47,6 +49,8 @@ function SignUpForm({open, handleClose, handleSubmit}) {
                         required/>
                         <TextField 
                         id="email"
+                        value={email}
+                        onChange={handleEmailChange}
                         label="Email" 
                         variant="filled"
                         type="email"
@@ -54,7 +58,9 @@ function SignUpForm({open, handleClose, handleSubmit}) {
                         autoComplete="email"
                         required/>
                         <TextField 
-                        id="newPassword" 
+                        id="newPassword"
+                        value={password}
+                        onChange={handlePasswordChange}
                         label="Password" 
                         variant="filled" 
                         type="password"

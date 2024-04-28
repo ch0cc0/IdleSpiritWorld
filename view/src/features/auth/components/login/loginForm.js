@@ -26,11 +26,9 @@ function LoginForm({open, handleClose, handleSubmit, username, password, handleU
             onClick={handleFormClick}
             onSubmit={handleSubmit}
             component="form"
+            autoComplete="off"
             >
-                <Box 
-                
-                noValidate
-                autoComplete="off"
+                <Box                 
                 sx={{
                     margin: 2,
                     borderRadius: 1,

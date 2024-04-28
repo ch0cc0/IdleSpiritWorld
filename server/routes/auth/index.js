@@ -13,8 +13,6 @@ module.exports = (app, passport) => {
 
     router.post('/login', checkIfNotAuthenticated, passport.authenticate('local'), (req, res) => {
         req.session.userId = req.user.id;
-
-        console.log(req.session);
         
         delete req.user.password;
         res.status(200).send(req.user);

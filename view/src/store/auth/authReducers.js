@@ -6,6 +6,7 @@ const initialState = {
     isAuthenticated: false,
     loginError: null,
     signupError: null,
+    signUpSuccess: null,
     userData: {}
   };
 
@@ -45,15 +46,14 @@ const authSlice = createSlice({
         })
         .addCase(signupUser.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.isAuthenticated = true;
+            state.signUpSuccess= true;
             state.signupError = null;
-            state.userData = action.payload;
         })
         .addCase(signupUser.rejected, (state, action) => {
             state.isLoading = false;
             state.isAuthenticated = false;
+            state.signUpSuccess= false;
             state.signupError = action.error.message;
-            state.userData = {};
         })
         builder.addCase(logoutUser.pending, (state) => {
             state.isLoading = true;
@@ -63,7 +63,6 @@ const authSlice = createSlice({
         })
         .addCase(logoutUser.rejected, (state) => {
             state.isLoading = false;
-            state.userData = {};
         })
     }
 });

@@ -25,7 +25,7 @@ module.exports = (app) => {
             const user = await getUserByUsername(username);
             if (!user) {
                 console.log('No user with that username found')
-                return done(null, false, { message: 'No user with that username found' });
+                return done(null, false, { message: 'Username or Password is Incorrect' });
             }
     
             if (await compare_password(password, user.password)) {
@@ -34,7 +34,7 @@ module.exports = (app) => {
                 return done(null, user);
             } else {
                 console.log('Passwords do not match')
-                return done(null, false, { message: 'Passwords do not match' });
+                return done(null, false, { message: 'Username or Password is Incorrect' });
             }
         } catch (e) {
             return done(e);

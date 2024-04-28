@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ThemeProvider, createTheme, responsiveFontSizes } from "@mui/material";
+import { Alert, ThemeProvider, createTheme, responsiveFontSizes } from "@mui/material";
 
 import Auth from "./pages/auth";
 import WelcomePage from "./pages/welcome";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { isAuthenticated } from "./store/auth/authActions";
 
