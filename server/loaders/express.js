@@ -13,7 +13,7 @@ module.exports = (app) => {
         resave: false,
         saveUninitialized: false,
         // secure false for development testing
-        cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 }
+        cookie: { secure: false, maxAge: 2 * 60 * 60 * 1000 }
     }));
     app.use(flash());
 
@@ -23,7 +23,7 @@ module.exports = (app) => {
     app.use(bodyParser.urlencoded({ extended: false }));
 
     app.use(cors({
-        origin: 'http://localhost:3000',
+        origin: ['http://localhost:3000', 'http://192.168.0.120:3000'],
         credentials: true
     }));
 

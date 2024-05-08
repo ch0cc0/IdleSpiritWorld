@@ -8,7 +8,7 @@ function AuthPage() {
   const [loginFormOpen, setLoginFormOpen] = useState(false);
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "90vh" }}>
       <Stack justifyContent="center" alignItems="center" spacing={10}>
         <Typography variant="h1" color="secondary" textAlign="center">IDLE SPIRIT WORLD</Typography>
         <Stack direction="row" spacing={5}>

@@ -65,6 +65,7 @@ const getUserById = async (id) => {
     }
 };
 
+
 module.exports = {
     hash,
     compare_password,
