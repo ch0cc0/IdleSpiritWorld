@@ -15,6 +15,7 @@ import { save, load } from "./utils/helper_funcs";
 import { charActions } from "./store/char/charReducers";
 import SkillsPage from "./pages/skills";
 import ClassPage from "./pages/classPage";
+import AdventurePage from "./pages/adventure";
 
 function App() {
   const dispatch = useDispatch();
@@ -83,6 +84,7 @@ function App() {
             {auth.isAuthenticated && char.character ? <Route path="/character" element={<CharacterPage />} /> : <Route path="/character" element={<Navigate to="/" />} />}
             {auth.isAuthenticated && char.character ? <Route path="/skills" element={<SkillsPage />} /> : <Route path="/skills" element={<Navigate to="/" />} />}
             {auth.isAuthenticated && char.character ? <Route path="/class" element={<ClassPage />} /> : <Route path="/class" element={<Navigate to="/" />} />}
+            {auth.isAuthenticated && char.character ? <Route path="/adventure" element={<AdventurePage />} /> : <Route path="/adventure" element={<Navigate to="/" />} />}
           </Routes>
         </Router>
       </ThemeProvider>

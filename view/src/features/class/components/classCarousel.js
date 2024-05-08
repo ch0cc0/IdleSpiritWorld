@@ -3,19 +3,34 @@ import ClassCard from "./classCard";
 import { motion, useMotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { fighter, mage, hunter, pickpocket, peasant } from "../../../utils/classCardObjects";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { charActions } from "../../../store/char/charReducers";
 
 function ClassCarousel() {
     const char = useSelector(state => state.char)
-    const classArray = [ fighter, mage, hunter, pickpocket, peasant ];
-    console.log(char.character)
+    const dispatch = useDispatch();
 
+    const classes = char.character.classes;
 
     const [focusedIndex, setFocusedIndex] = useState(null);
 
     const toggleFocusIndex = (index) => {
-        setFocusedIndex((prevIndex) => (prevIndex === index ? null : index))
+        setFocusedIndex((prevIndex) => (prevIndex === index ? null : index));
     };
+    
+    useEffect(() => {
+        console.log(`Focused Index: ${focusedIndex}`);
+    
+        const focusedClassKey = Object.keys(char.character.classes).find((_, index) => focusedIndex === index);
+    
+        const focusedClass = classes.hasOwnProperty(focusedClassKey) ? classes[focusedClassKey] : null;
+            
+        if (focusedClass) {
+            console.log('Focused Class: ');
+            console.log(focusedClass);
+            dispatch(charActions.setActiveClass(focusedClass));
+        }
+    }, [focusedIndex, char.character.classes, classes, dispatch, charActions]);
 
     const dragX = useMotionValue(0);
 
@@ -53,7 +68,7 @@ function ClassCarousel() {
 
         const x = dragX.get();
 
-        if ( x <= -DRAG_BUFFER && cardIndex < classArray.length-1) {
+        if ( x <= -DRAG_BUFFER && cardIndex < Object.keys(classes).length-1) {
             setCardIndex((prevCardIndex) => prevCardIndex + 1)
         } else if (x >= DRAG_BUFFER && cardIndex > 0) {
             setCardIndex((prevCardIndex) => prevCardIndex - 1)

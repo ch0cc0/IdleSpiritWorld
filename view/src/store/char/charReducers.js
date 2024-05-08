@@ -34,13 +34,13 @@ const charSlice = createSlice({
           console.log('Clearing state');
         },
         setActiveClass: (state, action) => {
-          if (state.character) {
-            state.character.activeClass = action;
+          if (state.character && action.payload) {
+            state.character.activeClass = action.payload;
           }
         },
         addXP: (state, action) => {
-          if (state.character) {
-            state.character.classes[state.character.activeClass].addXP(xp);
+          if (state.character && action.payload) {
+            state.character.classes[state.character.activeClass].addXP(action.payload);
           }
         },
     }

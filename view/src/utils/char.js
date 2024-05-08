@@ -41,6 +41,11 @@ export class CharacterModel {
                 'More damage to hit.',
                 'Scales with Dex and Cha'),
         };
+        
+    }
+
+    setActiveClass(class_) {
+        this.activeClass = class_;
     }
 
     conHpModifier() {
