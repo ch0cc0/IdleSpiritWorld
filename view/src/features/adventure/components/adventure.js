@@ -1,16 +1,29 @@
 import MobSpawn from "./mobSpawn";
 import HitPopUp from "./hitPopUp";
+import { mobActions } from "../../../store/mob/mobReducers";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function Adventure() {
 
+  const mob = useSelector(state => state.mob);
+
+  const dispatch = useDispatch();
+
   const [notifications, setNotifications] = useState([]);
 
-  const handleMobSpawnClick = (event) => {
+  const handleClick = (event) => {
     const { clientX, clientY } = event;
     const newNotification = { x: clientX, y: clientY };
     setNotifications([...notifications, newNotification]);
   };
+
+  useEffect(() => {
+    if (mob && mob.mobDead) {
+      console.log('Mob Spawn');
+      dispatch(mobActions.spawnMob());
+    }
+  }, [mob, mob.mobDead]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -22,10 +35,18 @@ function Adventure() {
 
   return (
     <>
-    <MobSpawn onClick={handleMobSpawnClick} />
-    {notifications.map((notification, index) => (
-        <HitPopUp key={index} position={notification} />
-      ))}
+      {mob && mob.mobSprite && mob.mobState ?
+        (
+          <>
+            <MobSpawn onClick={handleClick} mob={mob.mobState} sprite={mob.mobSprite} hp={mob.hp}/>
+            {notifications.map((notification, index) => (
+              <HitPopUp key={index} position={notification} />
+            ))}
+          </>
+        )
+        :
+        null
+      }
     </> 
   );
 }

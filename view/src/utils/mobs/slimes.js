@@ -4,12 +4,10 @@ import slimePurpleWithBoneSprite from '../../assets/slimes/slimePurpleWithBone.p
 import slimePurpleV2Sprite from '../../assets/slimes/slimePurpleVariant2.png'
 import slimeBlueGreyWithBoneSprite from '../../assets/slimes/slimeBlueGreyWithBone.png'
 
+import Mob from './model';
 
 
+const slime = new Mob('Slime', [slimeLimeV2Sprite, slimeDarkBlueSprite, slimePurpleWithBoneSprite, slimePurpleV2Sprite, slimeBlueGreyWithBoneSprite], 1, 10);
 
-export const slime = {
-    Name: 'Slame',
-    Sprite: [slimeLimeV2Sprite, slimeDarkBlueSprite, slimePurpleWithBoneSprite, slimePurpleV2Sprite, slimeBlueGreyWithBoneSprite],
-    xp: 1,
-    hp: 10,
-};
+
+export default slime;
